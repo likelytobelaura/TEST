@@ -99,3 +99,259 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+import oauth2client
+
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+scope = ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name('April9testproject-0594f691fd53.json', scope)
+
+gc = gspread.authorize(credentials)
+
+
+ss = gc.open_by_key('1Uy09X-FUm6gFVFRF72MrmHlOLae6d4cAmDuj2qvvIk4')
+answers = ss.worksheet('answers') 
+
+percent = ss.worksheet('friendshipP')
+
+username = input("Enter your Carondelet email. This will be your acting username.")
+
+while 1 == 1:
+  ec = input("What do you like to do in your spare time? Pick from this list: Performance art, Visual art, Write, Exercise, Volunteer, Nothing.   ")
+  if (ec == "Performance art"):
+    print(" ")
+    break
+  elif (ec == "Write"):
+    print(" ")
+    break
+  elif (ec == "Exercise"):
+    print(" ")
+    break
+  elif (ec == "Visual art"):
+    print(" ")
+    break
+  elif (ec == "Volunteer"):
+    print(" ")
+    break
+  elif (ec == "Nothing"):
+    print(" ")
+    break
+  else:
+    print("You didn't choose an extracurricular activity.")
+
+while 1 == 1: 
+  pet = input(str("If you own a pet, what type of animal is it? Pick from these choices: Dog, Cat, Other, or I do not own a pet: "))
+  if(pet == "Dog"):
+    print("ok")
+    break
+  elif(pet == "Cat"):
+    print("ok")
+    break
+  elif(pet == "Other"):
+    print("ok")
+    break
+  elif(pet == "I do not own a pet"):
+    print("ok")
+    break
+  else:
+    print("You did not choose a pet from the list.")
+while 0 == 0:
+  schoolsubject = input("What's your favorite school subject? Pick from Science/Math, Fine Arts, English, Religion, Language, History/PolyScience.") 
+  if(schoolsubject == "Science/Math"): 
+    break
+  elif(schoolsubject == "Fine Arts"):
+    break
+  elif(schoolsubject == "English"): 
+    break
+  elif(schoolsubject == "Religion"):
+    break
+  elif(schoolsubject == "Language"):
+    break
+  elif(schoolsubject == "History/PolyScience"): 
+    break
+  else:
+    print("Please choose from the options above")
+while 1==1:
+  sport = input(str("What is your favorite sport? Pick from these choices: Basketball, Baseball, Soccer, Tennis, Figure Skating, I don't like sports."))
+  if(sport == "Basketball"):
+    break
+  elif (sport == "Baseball"):
+    break
+  elif (sport == "Soccer"):
+    break
+  elif (sport == "Tennis"):
+    break
+  elif (sport == "Figure Skating"):
+    break
+  elif (sport == "I don't like sports."):
+    break
+  else:
+    print("You did not choose a sport from the list.")
+while 1 == 1:    
+  genre = input(str("Which genre most appeals to you? Pick from list: Pop, Alternative/Indie, Rock, Rap/Hip-Hop, R&B, World Music"))
+  if (genre == "Pop"):
+    print("ok")
+    break
+  elif (genre == "Alternative/Indie"):
+    print("ok")
+    break
+  elif (genre == "Rock"):
+    print("ok")
+    break
+  elif (genre == "Rap/Hip-Hop"):
+    print("ok")
+    break
+  elif (genre == "R&B"):
+    print("ok")
+    break
+  elif (genre == "World Music"):
+    print("ok")
+    break
+  else: print("You did not answer the question.")
+
+while 1==1:
+  food= input("What is your favorite type of food? Choose from: Chinese, Italian, American, or Mexican.")
+
+  if (food=="Chinese" or food=="chinese"):
+    food == "Chinese"
+    break
+  elif (food=="Italian" or food=="italian"): 
+    food == "Italian"
+    break
+  elif (food=="American" or food=="american"):
+    food == "American"
+    break
+  elif (food=="Mexican" or food=="mexican"):
+    food == "Mexican"
+    break
+  else:
+    print("You did not choose from the list.")
+
+while 1==1:
+  siblings= input(str("How many siblings do you have? Choose from: 0-1, 2-3, 4+."))
+  
+  if (siblings==str("0-1")):
+    print('Ok')
+    break
+  elif (siblings==str("2-3")):
+    print('Ok')
+    break
+  elif (siblings==str("4+")):
+    print('Ok')
+    break
+  else:
+    print("You did not choose from the list")
+    
+while 0 == 0:
+  color = input("What is your favorite type of color? Pick from the list and input the lowercase letter: a. warm colors, b. cool colors, c. monochrome colors")
+  if (color == "warm colors" or color == "a." or color == "a" or color == "a. warm colors"):
+    color = "a"
+    break
+  elif (color == "cool colors" or color == "b." or color == "b" or color == "b. cool colors"):
+    color = "b"
+    break
+  elif (color == "monochrome colors" or color == "c." or color == "c" or color == "c. monochrome colors"):
+    color = "c"
+    break
+  else:
+    print("Please choose from the provided list.")
+    
+while (1 == 1):
+  movie = input ("What is your favorite movie genre out of the following: Comedy, Action, Drama, or Horror.")
+  if movie == ("comedy") or movie == ("Comedy"):
+    movie == "comedy"
+    break
+  elif movie == ("Action") or movie == ("action"):
+    movie == "action"
+    break
+  elif movie == ("Drama") or movie == ("drama"):
+    movie == "drama"
+    break
+  elif movie == ("Horror") or movie == ("horror"):
+    movie == "horror"
+    break
+  else: 
+    print ("You did not choose an option from the list.")
+    
+answersInput = [username, ec, pet, schoolsubject, sport, genre, food, siblings, color, movie]
+
+answers.append_row(answersInput)
+
+c = int(1)
+tempPercent = 0
+percentList = []
+origPercent = []
+
+
+while 1 == 1:
+  tempPercent = 0
+  otherAnswers = answers.row_values(c)
+  if otherAnswers == []:
+    break
+  for i in range(1, 9):
+    if otherAnswers[i] == answersInput[i]:
+      tempPercent = tempPercent + 1
+  c = c + 1
+  tempPercent = (tempPercent/8)*100
+  percentList.append(tempPercent)
+  origPercent.append(tempPercent)
+  
+
+
+
+percentList.insert(0, username)  
+percent.append_row(percentList)
+percentList.pop(0)
+
+percentList.sort(reverse=True)
+
+#code to find the top five
+
+percentList.pop()
+top1 = max(percentList)
+percentList.pop(0)
+top2 = max(percentList)
+percentList.pop(0)
+top3 = max(percentList)
+percentList.pop(0)
+top4 = max(percentList)
+percentList.pop(0)
+top5 = max(percentList)
+percentList.pop(0)
+
+
+
+order1 = int(origPercent.index(top1)) + 1
+friend1 = str(percent.cell(order1, 1).value)
+print("Your number one friend is yourself!")
+print("Your first actual friend is: " + str(friend1) + " with a similarity of " + str(top1) + "%.")
+origPercent.pop(origPercent.index(top1))
+origPercent.insert(order1 - 1, 0)
+  
+order2 = int(origPercent.index(top2)) + 1
+friend2 = str(percent.cell(order2, 1).value)
+print("Your second actual friend is: " + str(friend2) + " with a similarity of " + str(top2) + "%.")
+origPercent.pop(origPercent.index(top2))
+origPercent.insert(order2 - 1, 0)
+  
+order3 = int(origPercent.index(top3)) + 1
+friend3 = str(percent.cell(order3, 1).value)
+print("Your third actual friend is: " + str(friend3) + " with a similarity of " + str(top3) + "%.")
+origPercent.pop(origPercent.index(top3))
+origPercent.insert(order3 - 1, 0)
+  
+order4 = int(origPercent.index(top4)) + 1
+friend4 = str(percent.cell(order4, 1).value)
+print("Your fourth actual friend is: " + str(friend4) + " with a similarity of " + str(top4) + "%.")
+origPercent.pop(origPercent.index(top4))
+origPercent.insert(order4 - 1, 0)
+  
+order5 = int(origPercent.index(top5)) + 1
+friend5 = str(percent.cell(order5, 1).value)
+print("Your fifth actual friend is: " + str(friend5) + " with a similarity of " + str(top5) + "%.")
+origPercent.pop(origPercent.index(top5))
+origPercent.insert(order5 - 1, 0)
